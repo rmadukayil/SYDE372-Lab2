@@ -1,3 +1,6 @@
+clear all;
+close all;
+
 global classA classB 
 global classA_part2 classB_part2 classA_part2_mean classA_part2_sd classB_part2_mean
 classA = load('lab2_3','a');
@@ -36,12 +39,59 @@ title('Class B - Gaussian Parametric Estimation');
 xlabel('x');
 ylabel('p(x)');
 legend('True p(x)','Estimated p(x) - Gaussian');
+%
+%PART 2: Plot parametric estimation - exponential
+Exponential_Est_classA = par_estimation_expo(classA_part2);
+Exponential_Est_classB = par_estimation_expo(classB_part2);
+
+figure(3);
+plot(classA_part2,Real_PDF_classA, 'r');
+hold on;
+plot(classA_part2,Exponential_Est_classA, 'b');
+title('Class A - Exponential Parametric Estimation');
+xlabel('x');
+ylabel('p(x)');
+legend('True p(x)','Estimated p(x) - Exponential');
+hold off;
+
+figure(4);
+plot(classB_part2,Real_PDF_classB, 'r');
+hold on;
+plot(classB_part2,Exponential_Est_classB, 'b');
+title('Class B - Exponential Parametric Estimation');
+xlabel('x');
+ylabel('p(x)');
+legend('True p(x)','Estimated p(x) - Exponential');
+
+%
+%PART 2: Plot parametric estimation - uniform
+Uniform_Est_classA = par_estimation_uniform(classA_part2);
+Uniform_Est_classB = par_estimation_uniform(classB_part2);
+
+figure(5);
+plot(classA_part2,Real_PDF_classA, 'r');
+hold on;
+plot(classA_part2,Uniform_Est_classA, 'b');
+title('Class A - Uniform Parametric Estimation');
+xlabel('x');
+ylabel('p(x)');
+legend('True p(x)','Estimated p(x) - Uniform');
+hold off;
+
+figure(6);
+plot(classB_part2,Real_PDF_classB, 'r');
+hold on;
+plot(classB_part2,Uniform_Est_classB, 'b');
+title('Class B - Uniform Parametric Estimation');
+xlabel('x');
+ylabel('p(x)');
+legend('True p(x)','Estimated p(x) - Uniform');
 
 % PART 2: Non parametric Estimation Using Parzen Windows
 [Non_Parametric_Est_classA_sd1,Non_Parametric_Est_classA_sd2] = non_par_estimation_parzen(classA_part2);
 [Non_Parametric_Est_classB_sd1,Non_Parametric_Est_classB_sd2] = non_par_estimation_parzen(classB_part2);
 
-figure(3);
+figure(7);
 plot(classA_part2,Real_PDF_classA, 'r');
 hold on;
 plot(classA_part2,Non_Parametric_Est_classA_sd1, 'b');
@@ -51,7 +101,7 @@ ylabel('p(x)');
 legend('True p(x)','Estimated p(x) - Non-Parametric');
 hold off;
 
-figure(4);
+figure(8);
 plot(classA_part2,Real_PDF_classA, 'r');
 hold on;
 plot(classA_part2,Non_Parametric_Est_classA_sd2, 'b');
@@ -61,7 +111,7 @@ ylabel('p(x)');
 legend('True p(x)','Estimated p(x) - Non-Parametric');
 hold off;
 
-figure(5);
+figure(9);
 plot(classB_part2,Real_PDF_classB, 'r');
 hold on;
 plot(classB_part2,Non_Parametric_Est_classB_sd1, 'b');
@@ -71,7 +121,7 @@ ylabel('p(x)');
 legend('True p(x)','Estimated p(x) - Non-Parametric');
 hold off;
 
-figure(6);
+figure(10);
 plot(classB_part2,Real_PDF_classB, 'r');
 hold on;
 plot(classB_part2,Non_Parametric_Est_classB_sd2, 'b');
