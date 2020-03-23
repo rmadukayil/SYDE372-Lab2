@@ -132,7 +132,82 @@ legend('True p(x)','Estimated p(x) - Non-Parametric');
 hold off;
 %%
 % PART 4
-global_min_AB = floor(min(min(arr_x_AB,arr_y_AB)))-1;
-global_max_AB = ceil(max(max(arr_x_AB,arr_y_AB)))+1;
-x = global_min_AB:0.1:global_max_AB;
-[X1, Y1] = ndgrid(x); 
+%4.1 and 4.2
+grid_min = min(min(min(classA_part4, classB_part4)));
+grid_max = max(max(max(classA_part4, classB_part4)));
+global_min_AB = floor(grid_min)-1;
+global_max_AB = ceil(grid_max)+1;
+x = global_min_AB:1:global_max_AB;
+[X, Y] = ndgrid(x); 
+[Z1, err1] = sequential_classifier(X, Y, 0);
+[Z2, err2] = sequential_classifier(X, Y, 0);
+[Z3, err3] = sequential_classifier(X, Y, 0);
+figure(11);
+scatter(classA_part4(:,1), classA_part4(:,2));
+hold on;
+scatter(classB_part4(:,1),classB_part4(:,2));
+hold on;
+for i=1:size(Z1,3)
+    contour(X,Y,Z1(:,:,i),1, 'k');
+end
+title('Sequential Classifier 1');
+legend('Class A','Class B');
+xlabel('x1');
+ylabel('x2');
+figure(12);
+scatter(classA_part4(:,1), classA_part4(:,2));
+hold on;
+scatter(classB_part4(:,1),classB_part4(:,2));
+hold on;
+for i=1:size(Z2,3)
+    contour(X,Y,Z2(:,:,i),1, 'k');
+end
+title('Sequential Classifier 2');
+legend('Class A','Class B');
+xlabel('x1');
+ylabel('x2');
+figure(13);
+scatter(classA_part4(:,1), classA_part4(:,2));
+hold on;
+scatter(classB_part4(:,1),classB_part4(:,2));
+hold on;
+for i=1:size(Z3,3)
+    contour(X,Y,Z3(:,:,i),1, 'k');
+end
+title('Sequential Classifier 3');
+legend('Class A','Class B');
+xlabel('x1');
+ylabel('x2');
+%4.3
+figure(14)
+[min, max, avg, std] = sequential_error_analysis(X, Y);
+scatter(min(:,1), min(:,2), 'r');
+hold on;
+scatter(max(:,1), max(:,2), 'b');
+hold on;
+scatter(avg(:,1), avg(:,2), 'g');
+hold on;
+scatter(std(:,1), std(:,2), 'm');
+hold on;
+p1 = polyfit(min(:,1), min(:,2),3);
+p2 = polyfit(max(:,1), max(:,2),3);
+p3 = polyfit(avg(:,1), avg(:,2),3);
+p4 = polyfit(std(:,1), std(:,2),3);
+x_axis = linspace(1,5);
+
+y1 = polyval(p1, x_axis);
+y2 = polyval(p2, x_axis);
+y3 = polyval(p3, x_axis);
+y4 = polyval(p4, x_axis);
+plot(x_axis, y1, 'r');
+hold on;
+plot(x_axis, y2, 'b');
+hold on;
+plot(x_axis, y3, 'g');
+hold on;
+plot(x_axis, y4, 'm');
+hold on;
+title('Error rates as a function of J');
+legend('min','max','avg', 'stdev');
+xlabel('j');
+ylabel('error rate');
