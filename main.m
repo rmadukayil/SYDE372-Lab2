@@ -3,8 +3,10 @@ close all;
 
 global classA_part4 classB_part4;
 global classA_part2 classB_part2 classA_part2_mean classA_part2_sd classB_part2_mean;
-classA = load('lab2_3','a');
-classB = load('lab2_3', 'b');
+A_data4 = load('lab2_3','a');
+B_data4 = load('lab2_3', 'b');
+classA_part4 = A_data4.a;
+classB_part4 = B_data4.b;
 classA_part2 = load('lab2_1','a');
 classB_part2 = load('lab2_1', 'b');
 classA_part2_mean = 5;
