@@ -230,31 +230,28 @@ global_min_AB = floor(grid_min)-1;
 global_max_AB = ceil(grid_max)+1;
 x = global_min_AB:1:global_max_AB;
 [X, Y] = ndgrid(x); 
-[Z1, err1] = sequential_classifier(X, Y, 0);
-[Z2, err2] = sequential_classifier(X, Y, 0);
-[Z3, err3] = sequential_classifier(X, Y, 0);
+[G1, err1] = sequential_classifier(X, Y, 0);
+[G2, err2] = sequential_classifier(X, Y, 0);
+[G3, err3] = sequential_classifier(X, Y, 0);
 figure(13);
 scatter(classA_part4(:,1), classA_part4(:,2));
 hold on;
 scatter(classB_part4(:,1),classB_part4(:,2));
 hold on;
-for i=1:size(Z1,3)
-    contour(X,Y,Z1(:,:,i),1, 'k');
-end
+contour(X,Y,G1,1,'k');
 title('Sequential Classifier 1');
-legend('Class A','Class B');
+legend('Class A','Class B', 'Sequential Classifier');
 xlabel('x1');
 ylabel('x2');
+hold off;
 figure(14);
 scatter(classA_part4(:,1), classA_part4(:,2));
 hold on;
 scatter(classB_part4(:,1),classB_part4(:,2));
 hold on;
-for i=1:size(Z2,3)
-    contour(X,Y,Z2(:,:,i),1, 'k');
-end
+contour(X,Y,G2,1,'k');
 title('Sequential Classifier 2');
-legend('Class A','Class B');
+legend('Class A','Class B', 'Sequential Classifier');
 xlabel('x1');
 ylabel('x2');
 figure(15);
@@ -262,11 +259,9 @@ scatter(classA_part4(:,1), classA_part4(:,2));
 hold on;
 scatter(classB_part4(:,1),classB_part4(:,2));
 hold on;
-for i=1:size(Z3,3)
-    contour(X,Y,Z3(:,:,i),1, 'k');
-end
+contour(X,Y,G2,1,'k');
 title('Sequential Classifier 3');
-legend('Class A','Class B');
+legend('Class A','Class B', 'Sequential Classifier');
 xlabel('x1');
 ylabel('x2');
 %4.3
