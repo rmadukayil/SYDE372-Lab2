@@ -259,7 +259,7 @@ scatter(classA_part4(:,1), classA_part4(:,2));
 hold on;
 scatter(classB_part4(:,1),classB_part4(:,2));
 hold on;
-contour(X,Y,G2,1,'k');
+contour(X,Y,G3,1,'k');
 title('Sequential Classifier 3');
 legend('Class A','Class B', 'Sequential Classifier');
 xlabel('x1');
